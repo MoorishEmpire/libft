@@ -1,2 +1,1 @@
-# libft
-Static Library containing the function I will need in the upcomming projects.
+Static libraty containing the functions I will need in the upcomming projects
