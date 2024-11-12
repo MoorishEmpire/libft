@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    makefile                                           :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: ael-most <ael-most@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/24 15:21:00 by ael-most          #+#    #+#              #
-#    Updated: 2024/10/29 19:28:10 by ael-most         ###   ########.fr        #
+#    Updated: 2024/11/05 23:24:05 by ael-most         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,12 +15,13 @@
 ###############
 
 NAME = libft.a
-#CC_STANDARD = gnu89
-CC_WARNINGS = -Wall -Werror -Wextra #-Wpedantic
 CC = cc
-CCFLAGS = $(CC_WARNINGS) #-std=$(CC_STANDARD)
-CC_COMPILER_CALL = $(CC) $(CCFLAGS)
+CCFLAGS = -Wall -Werror -Wextra
+CC_COMPILER_CALL = $(CC) $(CCFLAGS) 
+AR = ar
+ARFLAGS = rcs
 RM = rm -f
+HEADERS = libft.h
 
 ###################
 #### MANDATORY ####
@@ -39,17 +40,17 @@ SRC = 	ft_isalpha.c ft_isdigit.c ft_isascii.c \
 		ft_putchar_fd.c ft_putstr_fd.c \
 		ft_putendl_fd.c ft_putnbr_fd.c
 
-OBJ = $(SRC:.c=.o) 
+OBJ = $(SRC:.c=.o)
 
 ###############
 #### BONUS ####
 ###############
 
-BONUS_SRC =	ft_lstnew.c ft_lstadd_front.c \
-			ft_lstadd_back.c ft_lstdelone.c \
-			ft_lstclear.c ft_lstiter.c \
-			ft_lstmap.c ft_lstlast.c \
-			ft_lstsize.c
+BONUS_SRC =	ft_lstnew_bonus.c ft_lstadd_front_bonus.c \
+			ft_lstadd_back_bonus.c ft_lstdelone_bonus.c \
+			ft_lstclear_bonus.c ft_lstiter_bonus.c \
+			ft_lstmap_bonus.c ft_lstlast_bonus.c \
+			ft_lstsize_bonus.c
 
 BONUS_OBJ = $(BONUS_SRC:.c=.o)
 
@@ -57,19 +58,19 @@ BONUS_OBJ = $(BONUS_SRC:.c=.o)
 ## TARGETS ##
 #############
 
-all: $(NAME)
-
-$(NAME): $(OBJ)
-	ar rcs $(NAME) $(OBJ)
-
-bonus: $(BONUS_OBJ)
-	ar rcs $(NAME) $(BONUS_OBJ)
-
 clean:
 	$(RM) $(OBJ) $(BONUS_OBJ)
 
+all: $(NAME)
+
+$(NAME): $(OBJ)
+	$(AR) $(ARFLAGS) $@ $^
+
+bonus: $(BONUS_OBJ)
+	$(AR) $(ARFLAGS) $(NAME) $(BONUS_OBJ)
+
 fclean: clean
-	$(RM) *~ $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
 
@@ -77,13 +78,29 @@ re: fclean all
 ### PATTERNS ###
 ################
 
-%.o : %.c libft.h
+%.o : %.c $(HEADERS)
 	$(CC_COMPILER_CALL) -c $< -o $@
 
 ###############
 #### PHONY ####
 ###############
 
-.PHONY: all clean fclean re bonus
+.PHONY: clean
 
+##################
+## HELP MESSAGE ##
+##################
 
+help:
+	@echo "Available targets:"
+	@echo "  all     - Build the library"
+	@echo "  bonus   - Build the library with bonus features"
+	@echo "  clean   - Remove object files"
+	@echo "  fclean  - Remove object files and the library"
+	@echo "  re      - Rebuild the library"
+	@echo "  help    - Show this help message"
+
+####################
+## DEFAULT TARGET ##
+####################
+.DEFAULT_GOAL := all

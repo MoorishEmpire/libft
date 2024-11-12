@@ -6,13 +6,13 @@
 /*   By: ael-most <ael-most@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 21:05:19 by ael-most          #+#    #+#             */
-/*   Updated: 2024/10/29 11:26:04 by ael-most         ###   ########.fr       */
+/*   Updated: 2024/11/05 23:02:25 by ael-most         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_number_len(int n)
+static size_t	ft_number_len(int n)
 {
 	size_t	len;
 

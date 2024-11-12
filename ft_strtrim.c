@@ -6,7 +6,7 @@
 /*   By: ael-most <ael-most@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 21:44:43 by ael-most          #+#    #+#             */
-/*   Updated: 2024/10/30 22:09:07 by ael-most         ###   ########.fr       */
+/*   Updated: 2024/11/12 11:44:56 by ael-most         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 	if (!s1 || !set)
 		return (NULL);
-	if (*set == '\0')
-		return (ft_strdup(s1));
 	start = 0;
 	while (s1[start] && ft_strchr(set, s1[start]))
 		start++;

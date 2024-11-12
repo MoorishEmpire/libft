@@ -6,7 +6,7 @@
 /*   By: ael-most <ael-most@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 17:34:42 by ael-most          #+#    #+#             */
-/*   Updated: 2024/10/29 13:20:37 by ael-most         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:34:20 by ael-most         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_atoi(const char *str)
 {
-	int		i;
-	long	number;
-	int		sign;
+	int					i;
+	unsigned long long	number;
+	int					sign;
 
 	sign = 1;
 	i = 0;
@@ -31,9 +31,12 @@ int	ft_atoi(const char *str)
 	number = 0;
 	while (ft_isdigit(str[i]))
 	{
-		number *= 10;
-		number += str[i] - '0';
+		number = number * 10 + str[i] - '0';
+		if (number > LLONG_MAX && sign == 1)
+			return (-1);
+		if (number > LLONG_MAX && sign == -1)
+			return (0);
 		i++;
 	}
-	return (sign * number);
+	return ((int)sign * number);
 }

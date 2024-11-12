@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ael-most <ael-most@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/25 17:54:23 by ael-most          #+#    #+#             */
-/*   Updated: 2024/10/30 13:27:12 by ael-most         ###   ########.fr       */
+/*   Created: 2024/10/25 18:59:56 by ael-most          #+#    #+#             */
+/*   Updated: 2024/11/07 16:07:11 by ael-most         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void*))
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
 	t_list	*temp;
 
 	if (!lst || !del)
 		return ;
-	temp = lst;
-	lst = temp->next;
-	del(temp->content);
-	free(temp);
+	while (*lst)
+	{
+		temp = *lst;
+		*lst = (*lst)->next;
+		ft_lstdelone(temp, del);
+	}
+	*lst = NULL;
 }

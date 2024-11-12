@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strchr.c                                           :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ael-most <ael-most@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 23:17:05 by ael-most          #+#    #+#             */
-/*   Updated: 2024/10/24 23:42:51 by ael-most         ###   ########.fr       */
+/*   Updated: 2024/11/03 22:49:56 by ael-most         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,13 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	char	target;
-
-	target = (char)c;
 	while (*s)
 	{
-		if (*s == target)
+		if (*s == (char)c)
 			return ((char *)s);
 		s++;
 	}
-	if (target == '\0')
+	if ((char)c == '\0')
 		return ((char *)s);
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: ael-most <ael-most@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 22:31:07 by ael-most          #+#    #+#             */
-/*   Updated: 2024/10/30 23:52:43 by ael-most         ###   ########.fr       */
+/*   Updated: 2024/11/03 22:55:30 by ael-most         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,8 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	src_len = ft_strlen(src);
 	if (!dst && dstsize == 0)
 		return (src_len);
-	if (dstsize == 0)
-		return (src_len);
 	dst_len = ft_strlen(dst);
-	if (dst_len >= dstsize)
+	if (dstsize <= dst_len)
 		return (dstsize + src_len);
 	space = dstsize - dst_len - 1;
 	i = 0;
